@@ -110,38 +110,24 @@ def iterate_pagerank(corpus, damping_factor):
     their estimated PageRank value (a value between 0 and 1). All
     PageRank values should sum to 1.
     """
-    probabilities = {}
+    probabilities = {page: 1 / len(corpus) for page in corpus}
     
-    for page in corpus:
-        probabilities[page] = 1 / len(corpus)
-    
-    flag = True
-    probabilities_copy = {}
-    
-    while flag:
+    while True:
         probabilities_copy = copy.deepcopy(probabilities)
-        for page1 in corpus:
-            if (len(corpus[page1]) != 0):
-                sum = 0
-                for page2 in corpus:
-                    # Check if page2 links to page1
-                    if page1 in corpus[page2] and page1 != page2:
-                        # Add the probability of page2 linking to page1
-                        sum += probabilities[page2] / len(corpus[page2])
-                # Update the probability of page1
-                probabilities_copy[page1] = (1 - damping_factor) / len(corpus) + damping_factor * sum
+        for page in corpus:
+            rank = (1 - damping_factor) / len(corpus)
+            for linking_page in corpus:
+                if page in corpus[linking_page]:
+                    rank += damping_factor * probabilities[linking_page] / len(corpus[linking_page])
+            probabilities_copy[page] = rank
         
-        # Check if the difference between the probabilities is less than 0.001
-        sub = {key: probabilities_copy[key] - probabilities[key] for key in probabilities_copy}
-        for i in sub.keys():
-            if abs(sub[i]) < 0.001 and sub[i] != 0:
-                flag = False
-                break
-            else:
-                flag = False
-        
-    return probabilities_copy
-    
+        # Check for convergence
+        if all(abs(probabilities_copy[page] - probabilities[page]) < 0.001 for page in corpus):
+            break
+        probabilities = probabilities_copy
+
+    return probabilities
+
  
 if __name__ == "__main__":
     main()
