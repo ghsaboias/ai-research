@@ -134,7 +134,7 @@ def iterate_pagerank(corpus, damping_factor):
         # Check if the difference between the probabilities is less than 0.001
         sub = {key: probabilities_copy[key] - probabilities[key] for key in probabilities_copy}
         for i in sub.keys():
-            if abs(sub[i]) < 0.001 and abs(sub[i]) > 0:
+            if abs(sub[i]) < 0.001 and sub[i] != 0:
                 flag = True
                 break
             else:
