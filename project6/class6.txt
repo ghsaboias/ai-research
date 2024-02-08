@@ -1,0 +1,57 @@
+Natural Language Processing
+
+automatic summary
+info extraction
+machine translation
+question answering
+text classification
+sentiment analysis
+
+syntax (structure), semantics (meaning)
+
+formal grammar: system of rules for generating sentences in a language
+    context-free grammar: word = terminal symbol. N for noun, V for verb, these are non-terminal symbols
+        N -> she | city | car
+        V -> saw | ate | walks
+        NP -> N | D N: noun phrase can be a noun or a determiner (e.g. "the") followed by a noun
+        VP -> V | V NP: verb phrase - "saw the city"
+        S (sentence) -> NP VP: "she saw the city"
+
+Python: nltk - natural language toolkit
+
+n-gram: a contiguous sequence of n items from a sample of text
+tokenization: splitting sequence of characters into tokens
+
+Markov Chains: sequence of values, can predict n from n-1.
+MARKOV CHAIN FOR LANGUAGE!!!
+Python: markovify
+
+bag-of-words model: text as unordered collection of words
+Naive Bayes classifier: classification based on Bayes' Rule
+Sentiment analysis: P(good | selected bag of words) and P(bad | selected bag of words)
+
+additive smoothing: add alpha to each value in distribution to smooth data (Laplace smoothing: add 1)
+
+how to represent words?
+    he wrote a book
+    he = [1, 0, 0, 0]
+    wrote = [0, 1, 0, 0]
+    above is a one-hot representation
+    distributed representation: meaning distributed across multiple values - CONTEXT is KEY!
+    word2vec: model for generating word vectors (by context)
+    encoder-decoder, hidden states
+
+Attention: what is important (requires attention)?
+What is the capital of Brazil? The capital of Brazil is ...
+... -> which values from input are more relevant to generate this word?
+
+attention mechanism + recurrent NN: powerful
+recurrent NN: hard to parallelize
+Transformers help with parallelization!
+    ENCODING STEP: input word + positional encoding -> self-attention step -> NN -> encoded representation
+    self-attention step: paying attention to other input words, can use multiple self-attention steps (Multi-Headed Self-Attention)
+    self-attention and NN steps can happen N times
+    DECODING STEP: output word + positional encoding -> self-attention -> attention -> NN -> output word
+    attention step: attention to the encoded representations (of the input words)
+
+Search -> Knowledge -> Uncertainty -> Optimization -> Learning -> NN -> Language
