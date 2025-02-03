@@ -1,6 +1,6 @@
-# Project Name
+# Harvard CS50 Projects
 
-This repository contains solutions to the projects from CS50’s Introduction to Artificial Intelligence with Python. Each project includes different sub-projects related to AI and game logic.
+This repository contains solutions to the projects from Harvard's CS50 Introduction to Artificial Intelligence with Python. Each project includes different sub-projects related to AI and game logic.
 
 ## Table of Contents
 
